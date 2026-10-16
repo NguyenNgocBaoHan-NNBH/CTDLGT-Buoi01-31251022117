@@ -6,31 +6,28 @@ namespace CTDLGT_Buoi01_31251022117
 {
     internal class Bai01
     {
-        public static void Main()
+        static void MaxMinSumMean(int a, int b, int c, out int min, out double mean, out int sum, out int max)
+        {
+            max = a;
+            min = a;
+            mean = (a + b + c) / 3.0;
+            sum = a + b + c;
+            if (b > max) max = b;
+            else if (c > max) max = c;
+
+            if (b < min) min = b;
+            else if (c < min) min = c;
+        }
+
+
+        static void Main1()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            Console.Write("Nhập 3 số nguyên a, b, c (cách nhau bởi dấu cách): ");
-
-            string[] input = Console.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-            if (input.Length >= 3 &&
-                long.TryParse(input[0], out long a) &&
-                long.TryParse(input[1], out long b) &&
-                long.TryParse(input[2], out long c))
-            {
-                long max = Math.Max(a, Math.Max(b, c));
-                long min = Math.Min(a, Math.Min(b, c));
-
-                long tong = a + b + c;
-                double trungBinh = tong / 3.0;
-
-                Console.WriteLine($"Lớn nhất: {max}; nhỏ nhất: {min}; tổng: {tong}; trung bình: {trungBinh:F2}");
-            }
-            else
-            {
-                Console.WriteLine("Dữ liệu nhập vào không hợp lệ. Vui lòng nhập đúng 3 số nguyên.");
-            }
+            Console.Write("Input a: "); int a = int.Parse(Console.ReadLine());
+            Console.Write("Input b: "); int b = int.Parse(Console.ReadLine());
+            Console.Write("Input c: "); int c = int.Parse(Console.ReadLine());
+            MaxMinSumMean(a, b, c, out int min, out double mean, out int sum, out int max);
+            Console.WriteLine($"Lớn nhất: {max}; Nhỏ nhất: {min}; Tổng: {sum}; Trung bình: {mean:F2}");
         }
     }
 }
-

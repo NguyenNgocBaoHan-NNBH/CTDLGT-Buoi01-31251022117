@@ -6,63 +6,49 @@ namespace CTDLGT_Buoi01_31251022117
 {
     internal class Bai02
     {
-        public static void Main()
+        static void KhoiTaoMang(int[] arr)
         {
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
-            Console.Write("Nhập số lượng phần tử n (2 <= n <= 100000): ");
-            if (!int.TryParse(Console.ReadLine(), out int n) || n < 2)
+            for (int i = 0; i < arr.Length; i++)
             {
-                Console.WriteLine("Số lượng phần tử không hợp lệ.");
-                return;
+                Console.Write($"Phần tử thứ {i}: "); arr[i] = int.Parse(Console.ReadLine());
             }
+        }
+        static void Tim2SoLonNhatPhanBiet(int[] arr)
+        {
+            int? max1 = null;
+            int? max2 = null;
 
-            Console.WriteLine($"Nhập {n} phần tử của mảng (cách nhau bởi dấu cách):");
-            string[] input = Console.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-            int[] arr = new int[n];
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < arr.Length; i++)
             {
-                arr[i] = int.Parse(input[i]);
-            }
-
-            int max1 = int.MinValue;
-            int max2 = int.MinValue;
-            bool coMax1 = false;
-            bool coMax2 = false;
-
-            for (int i = 0; i < n; i++)
-            {
-                int val = arr[i];
-
-                if (!coMax1)
-                {
-                    max1 = val;
-                    coMax1 = true;
-                }
-                else if (val > max1)
+                int x = arr[i];
+                if (max1 == null || x > max1)
                 {
                     max2 = max1;
-                    coMax2 = coMax1;
-                    max1 = val;
+                    max1 = x;
                 }
-                else if (val < max1)
+                else if (x < max1 && (max2 == null || x > max2))
                 {
-                    if (!coMax2 || val > max2)
-                    {
-                        max2 = val;
-                        coMax2 = true;
-                    }
+                    max2 = x;
                 }
             }
 
-            if (coMax2)
-            {
-                Console.WriteLine($"{max1} {max2}");
-            }
-            else
+            if (max2 == null)
             {
                 Console.WriteLine("NO");
             }
+            else
+            {
+                Console.WriteLine($"{max1}  {max2}");
+            }
+        }
+
+        static void Main2()
+        {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.Write("Nhập n: "); int n = int.Parse(Console.ReadLine());
+            int[] arr = new int[n];
+            KhoiTaoMang(arr);
+            Tim2SoLonNhatPhanBiet(arr);
         }
     }
 }
